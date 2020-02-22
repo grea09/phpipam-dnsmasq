@@ -19,7 +19,7 @@ $config['key'] = "${IPAM_AGENT_KEY}";
 //$config['pingpath'] = "/sbin/ping";
 
 $config['method'] 	= "fping";
-$config['pingpath'] = "/usr/local/sbin/fping";
+$config['pingpath'] = "/usr/sbin/fping";
 
 # permit non-threaded checks (default: false)
 # ******************************/
