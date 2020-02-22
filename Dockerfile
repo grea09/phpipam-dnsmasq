@@ -18,12 +18,13 @@ RUN echo -e "http://dl-cdn.alpinelinux.org/alpine/edge/community\nhttp://dl-cdn.
 RUN apk -U upgrade -a
 RUN apk --no-cache update
 
-RUN apk --no-cache add dnsmasq php7 php7-session php7-pdo php7-pdo_mysql php7-gmp php7-json php7-pcntl php7-gettext php7-ctype php7-iconv php7-mbstring php7-pear php7-posix git python3 py3-mysqlclient perl bash nano
+RUN apk --no-cache add dnsmasq php7 php7-session php7-pdo php7-pdo_mysql php7-gmp php7-json php7-pcntl php7-gettext php7-ctype php7-iconv php7-mbstring php7-pear php7-posix git python3 py3-mysqlclient fping perl bash nano
 RUN ln -s `which python3` /usr/bin/python
 RUN ln -s `which pip3` /usr/bin/pip
 
 RUN git clone --recursive https://github.com/phpipam/phpipam-agent/
-RUN git clone https://github.com/debops/phpipam-scripts.git
+#RUN git clone https://github.com/debops/phpipam-scripts.git
+RUN git clone https://github.com/grea09/phpipam-scripts.git
 
 ENV CRONTAB_FILE=/etc/crontabs/root
 RUN echo "* * * * * php /app/phpipam-agent/index.php update > /proc/1/fd/1 2>/proc/1/fd/2" >> ${CRONTAB_FILE}
