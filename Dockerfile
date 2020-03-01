@@ -25,10 +25,10 @@ RUN ln -s `which pip3` /usr/bin/pip
 RUN git clone --recursive https://github.com/phpipam/phpipam-agent/
 #RUN git clone https://github.com/debops/phpipam-scripts.git
 RUN git clone --single-branch --branch patch-1 https://github.com/grea09/phpipam-scripts.git
-# Latest commit: fixing deprecated file type
 
 ENV CRONTAB_FILE=/etc/crontabs/root
-RUN echo "* * * * * php /app/phpipam-agent/index.php update > /proc/1/fd/1 2>/proc/1/fd/2" >> ${CRONTAB_FILE}
+RUN echo "*/15 * * * * php /app/phpipam-agent/index.php update" >> ${CRONTAB_FILE}
+RUN echo "*/15 * * * * php /app/phpipam-agent/index.php discover" >> ${CRONTAB_FILE}
 RUN echo "*/5 * * * * /app/phpipam-scripts/phpipam-hosts -o /etc/dnsmasq.conf -x" >> ${CRONTAB_FILE}
 RUN echo "* * * * * dnsmasq -k" >> ${CRONTAB_FILE}
 
